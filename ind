@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>MVP Top 5</title>
+
+<style>
+body {
+    margin:0;
+    background:transparent;
+    font-family:Arial, sans-serif;
+    color:white;
+}
+
+#box {
+    width:320px;
+    padding:15px;
+    border-radius:20px;
+    background:linear-gradient(180deg, rgba(60,0,90,0.9), rgba(20,0,40,0.9));
+    border:2px solid #a855f7;
+    box-shadow:0 0 20px rgba(168,85,247,0.6);
+}
+
+h1 {
+    text-align:center;
+    color:#c084fc;
+    margin-bottom:10px;
+}
+
+.player {
+    display:flex;
+    justify-content:space-between;
+    padding:6px;
+    margin:3px 0;
+    border-radius:8px;
+    background:rgba(255,255,255,0.05);
+}
+
+.top1 {
+    color:gold;
+    font-weight:bold;
+    background:rgba(255,215,0,0.1);
+}
+
+.top2 { color:silver; }
+.top3 { color:#cd7f32; }
+
+button {
+    margin-top:12px;
+    width:100%;
+    padding:10px;
+    background:#a855f7;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    color:white;
+}
+
+button:hover {
+    background:#9333ea;
+}
+</style>
+</head>
+
+<body>
+
+<div id="box">
+    <h1>MVP TOP 5 🏆</h1>
+
+    <div id="list"></div>
+
+    <button onclick="reset()">RESET</button>
+</div>
+
+<script>
+let data = [
+    {name:"Player1", score:150},
+    {name:"Player2", score:120},
+    {name:"Player3", score:90},
+    {name:"Player4", score:60},
+    {name:"Player5", score:30}
+];
+
+function render(){
+    let html="";
+    data.sort((a,b)=>b.score-a.score);
+
+    data.slice(0,5).forEach((p,i)=>{
+        let cls = "";
+        if(i==0) cls="top1";
+        if(i==1) cls="top2";
+        if(i==2) cls="top3";
+
+        html += `<div class="player ${cls}">
+                    <span>${i+1}. ${p.name}</span>
+                    <span>${p.score}</span>
+                 </div>`;
+    });
+
+    document.getElementById("list").innerHTML = html;
+}
+
+function reset(){
+    data.forEach(p=>p.score=0);
+    render();
+}
+
+render();
+</script>
+
+</body>
+</html>
